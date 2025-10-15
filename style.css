@@ -1,0 +1,147 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #d4f1ff, #e6f7ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Signup Container */
+.signup-container {
+  background: #fff;
+  padding: 35px 45px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 480px;
+  max-width: 95%;
+  text-align: left;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Branding */
+.branding {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.branding h1 {
+  font-size: 26px;
+  color: #0277bd;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.branding span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.branding p {
+  color: #555;
+  font-size: 14.5px;
+}
+
+/* Section Headers */
+.signup-container h2 {
+  text-align: center;
+  color: #0277bd;
+  margin-bottom: 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.form-note {
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Input Group */
+.input-group {
+  margin-bottom: 14px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  color: #01579b;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #b3e5fc;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #fafafa;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #0288d1;
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(2, 136, 209, 0.25);
+}
+
+/* Button */
+button {
+  width: 100%;
+  background: #0288d1;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 6px;
+}
+
+button:hover {
+  background: #0277bd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(2, 119, 189, 0.25);
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+.login-link a {
+  color: #0277bd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
