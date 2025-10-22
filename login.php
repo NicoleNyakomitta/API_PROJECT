@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
 include 'db_connect.php';
 
@@ -35,9 +34,6 @@ if (isset($_POST['login'])) {
     $stmt->close();
     $conn->close();
 }
-?>
-=======
-
 class LoginScreen {
 
     private $db;
@@ -158,4 +154,3 @@ class LoginScreen {
 $loginScreen = new LoginScreen();
 $loginScreen->handleLogin();
 $loginScreen->show();
->>>>>>> 4d17f55fd94804b4fa41cf873fd3a6e98e65b6e7
