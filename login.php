@@ -1,4 +1,11 @@
 <?php
+<<<<<<< HEAD
+// Start session and include files at the very top
+require_once 'includes/auth.php';
+
+// Initialize error variable
+$error = '';
+=======
 session_start();
 include 'db_connect.php';
 
@@ -35,122 +42,95 @@ if (isset($_POST['login'])) {
     $conn->close();
 }
 class LoginScreen {
+>>>>>>> 9b3be0b9b323f0dec2d9e7c85efe350c253c17fb
 
-    private $db;
-
-    // Constructor to create a DB connection
-    public function __construct() {
-       
-        $host = "127.0.0.1";   
-        $dbname = "geolink"; 
-        $user = "root"; 
-        $pass = "0000"; 
-
-        try {
-            $this->db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
-            }
-        }
-
-    // Show the login form
-    public function show() {
-        ?>
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Login</title>
-            <style>
-                body {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    font-family: cursive, sans-serif;
-                    background: #f8f8f8;
-                }
-                .container {
-                    text-align: center;
-                    background: white;
-                    padding: 30px;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                    width: 350px;
-                }
-                img {
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 50%;
-                }
-                input {
-                    width: 90%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 6px;
-                }
-                button {
-                    background: brown;
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                    font-weight: bold;
-                }
-                button:hover {
-                    background: darkred;
-                }
-                .link {
-                    margin-top: 15px;
-                    display: block;
-                    font-weight: bold;
-                    font-size: 14px;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <img src="pp.png" alt="reg">
-                <h1>Login Here</h1>
-
-                <form method="POST" action="">
-                    <input type="email" name="email" placeholder="Enter email" required><br>
-                    <input type="password" name="password" placeholder="Enter password" required><br>
-                    <button type="submit" name="login">Login</button>
-                </form>
-
-                <a href="signup.php" class="link">Already have an account? Register</a>
-            </div>
-        </body>
-        </html>
-        <?php
-    }
-
-    // Handle login logic with DB
-    public function handleLogin() {
-        if (isset($_POST['login'])) {
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-
-            // Query user from DB
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($user && password_verify($password, $user['password'])) {
-                echo "<p style='color:green; text-align:center;'>✅ Login successful! Welcome, {$user['email']}.</p>";
-                // TODO: Start session and redirect to dashboard
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = sanitizeInput($_POST['username']);
+    $password = $_POST['password'];
+    
+    if (loginUser($username, $password)) {
+        if ($_SESSION['is_2fa_enabled']) {
+            // Send 2FA code via email
+            if (send2FACodeToUser($_SESSION['user_id'], $_SESSION['email'])) {
+                $_SESSION['2fa_pending'] = true;
+                header('Location: verify_2fa.php');
+                exit();
             } else {
-                echo "<p style='color:red; text-align:center;'>❌ Invalid email or password.</p>";
+                $error = "Failed to send 2FA code. Please try again.";
             }
+        } else {
+            header('Location: dashboard.php');
+            exit();
         }
+    } else {
+        $error = "Invalid username or password";
     }
 }
+?>
 
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StockFlow Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2>Welcome Back</h2>
+                <p class="auth-subtitle">Sign in to your StockFlow Pro account</p>
+            </div>
+            
+            <?php if (!empty($error)): ?>
+                <div class="alert error">
+                    <i class="fas fa-exclamation-circle"></i> <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+            
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+            
+            <div class="auth-links" style="text-align: center; margin-top: 2rem;">
+                <p style="color: var(--gray);">Don't have an account? 
+                    <a href="register.php" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+                        Create one here
+                    </a>
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="reset_credentials.php" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+                        Forgot your password?
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+=======
 // Run
 $loginScreen = new LoginScreen();
 $loginScreen->handleLogin();
 $loginScreen->show();
+>>>>>>> 9b3be0b9b323f0dec2d9e7c85efe350c253c17fb
