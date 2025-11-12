@@ -6,7 +6,7 @@ requireLogin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['create_order'])) {
         $user_id = $_SESSION['user_id'];
-        $inventory_id = (int)$_POST['inventory_id'];
+        $inventorya_id = (int)$_POST['inventory_id'];
         $quantity = (int)$_POST['quantity'];
         
         // Get item price

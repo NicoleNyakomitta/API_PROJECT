@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/auth.php';
+require_once 'includes/log.php'; // Make sure this file defines logSecurityEvent
 
 // Check if this is part of a password reset flow
 if (!isset($_SESSION['reset_2fa_required']) || !$_SESSION['reset_2fa_required']) {

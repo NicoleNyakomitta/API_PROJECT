@@ -2,19 +2,6 @@
 require_once 'includes/auth.php';
 requireLogin();
 
-/**
- * Update the 2FA status for a user in the database.
- *
- * @param int $user_id
- * @param bool $new_status
- * @return bool
- */
-function update2FAStatus($user_id, $new_status) {
-    global $pdo;
-    $stmt = $pdo->prepare("UPDATE users SET is_2fa_enabled = ? WHERE id = ?");
-    return $stmt->execute([$new_status ? 1 : 0, $user_id]);
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['toggle_2fa'])) {
         $new_status = !$_SESSION['is_2fa_enabled'];
