@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - BlueWave Hotel System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="signup-container">
+    <div class="branding">
+      <h1>🏨 <span>BlueWave Hotel System</span></h1>
+      <p>Manage your bookings and reservations with ease</p>
+    </div>
+
+    <h2>Create Your Account</h2>
+    <p class="form-note">
+      Join now to manage room reservations, bookings, and customer details.
+    </p>
+
+    <form action="signup.php" method="POST">
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" name="fullname" required />
+      </div>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" name="email" required />
+      </div>
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone" required />
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" required minlength="6" />
+      </div>
+      <button type="submit" name="signup">Sign Up</button>
+      <p class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // Start session and include files at the very top
 require_once 'includes/auth.php';
 
@@ -177,3 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
+=======
+session_start();
+session_unset();
+session_destroy();
+header("Location: login.html");
+exit();
+?>
+>>>>>>> 9b3be0b9b323f0dec2d9e7c85efe350c253c17fb
